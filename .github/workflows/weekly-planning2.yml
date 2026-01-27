@@ -1,4 +1,4 @@
-name: Create Weekly Discussion
+name: Create Weekly Discussion2
 on:
   schedule:
     - cron: '0 8 * * MON'  # Every Monday 8 AM UTC
