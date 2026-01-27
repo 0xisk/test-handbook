@@ -21,124 +21,124 @@ jobs:
             
             const body = `📊 [GitHub Project](https://github.com/orgs/OpenZeppelin/projects/41)
 
-**📅 Meeting:** Monday, ${date} · 15:30 – 16:15 UTC (16:30 – 17:15 CET)  
-**🎥 Video call:** https://meet.google.com/jjw-weky-jzg  
-**📞 Dial-in:** +49 30 300195060, PIN: 947 971 854 2124#
+            **📅 Meeting:** Monday, ${date} · 15:30 – 16:15 UTC (16:30 – 17:15 CET)  
+            **🎥 Video call:** https://meet.google.com/jjw-weky-jzg  
+            **📞 Dial-in:** +49 30 300195060, PIN: 947 971 854 2124#
 
-**📝 Meeting Notes:** [Will be added after meeting]
+            **📝 Meeting Notes:** [Will be added after meeting]
 
----
+            ---
 
-# 📕 Agenda
+            # 📕 Agenda
 
-*add any topic you want to discuss*
+            *add any topic you want to discuss*
 
-- [ ] @username: agenda item
+            - [ ] @username: agenda item
 
----
+            ---
 
-# 🗞 Management Updates
+            # 🗞 Management Updates
 
-### Khizer
+            ### Khizer
 
-- 
+            - 
 
-### Pepe
+            ### Pepe
 
-- 
+            - 
 
----
+            ---
 
-# 👨‍💻 Developer Updates
+            # 👨‍💻 Developer Updates
 
-### 👻 Andrew
+            ### 👻 Andrew
 
-**past week:**
-- 
+            **past week:**
+            - 
 
-**this week:**
-- 
+            **this week:**
+            - 
 
-**requests:**
-- 
+            **requests:**
+            - 
 
-### 𓂀 Iskander
+            ### 𓂀 Iskander
 
-**past week:**
+            **past week:**
 
-<details>
-<summary>TODO</summary>
+            <details>
+            <summary>TODO</summary>
 
-- [ ] 
-- [ ] 
+            - [ ] 
+            - [ ] 
 
-</details>
+            </details>
 
-<details>
-<summary>Dev</summary>
+            <details>
+            <summary>Dev</summary>
 
-- [ ] 
-- [ ] 
+            - [ ] 
+            - [ ] 
 
-</details>
+            </details>
 
-<details>
-<summary>R&D</summary>
+            <details>
+            <summary>R&D</summary>
 
-- [ ] 
-- [ ] 
+            - [ ] 
+            - [ ] 
 
-</details>
+            </details>
 
-<details>
-<summary>Meetings</summary>
+            <details>
+            <summary>Meetings</summary>
 
-- [ ] 
-- [ ] 
+            - [ ] 
+            - [ ] 
 
-</details>
+            </details>
 
-**this week:**
-- 
+            **this week:**
+            - 
 
-**requests:**
-- 
+            **requests:**
+            - 
 
-### 👽 Em
+            ### 👽 Em
 
-**past week:**
+            **past week:**
 
-<details>
-<summary>General</summary>
+            <details>
+            <summary>General</summary>
 
-- [ ] 
-- [ ] 
+            - [ ] 
+            - [ ] 
 
-</details>
+            </details>
 
-<details>
-<summary>Reviews</summary>
+            <details>
+            <summary>Reviews</summary>
 
-- [ ] 
-- [ ] 
+            - [ ] 
+            - [ ] 
 
-</details>
+            </details>
 
-<details>
-<summary>PRs</summary>
+            <details>
+            <summary>PRs</summary>
 
-- [ ] 
-- [ ] 
+            - [ ] 
+            - [ ] 
 
-</details>
+            </details>
 
-**this week:**
-- 
+            **this week:**
+            - 
 
-**requests:**
-- `;
+            **requests:**
+            - `;
 
-            const CATEGORY_ID = 'DIC_kwDORCQWoM4C1fAZ';  // Weekly Planning category
+            const CATEGORY_ID = 'DIC_kwDORCQWoM4C1fAZ';
             
             await github.rest.discussions.create({
               owner: context.repo.owner,
