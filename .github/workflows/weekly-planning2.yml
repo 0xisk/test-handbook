@@ -1,0 +1,109 @@
+name: Create Weekly Discussion
+on:
+  schedule:
+    - cron: '0 8 * * MON'  # Every Monday 8 AM UTC
+  workflow_dispatch:  # Manual trigger button
+
+jobs:
+  create-discussion:
+    runs-on: ubuntu-latest
+    permissions:
+      discussions: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.DISCUSSIONS_TOKEN }}
+          script: |
+            const emojis = ['🧬', '🔬', '🌙', '🚀', '🎯', '🔮', '⚡', '🌟', '💎', '🎨', '🔥', '🌊', '🎪', '🎭'];
+            const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            const today = new Date();
+            const year = today.getFullYear();
+            const week = Math.ceil((today - new Date(year, 0, 1)) / 604800000);
+            const date = today.toISOString().split('T')[0];
+            
+            const body = `📊 [GitHub Project](https://github.com/orgs/OpenZeppelin/projects/41)
+
+            **📅 Meeting:** Monday, ${date} · 15:30 – 16:15 UTC (16:30 – 17:15 CET)  
+            **🎥 Video call:** https://meet.google.com/jjw-weky-jzg  
+            **📞 Dial-in:** +49 30 300195060, PIN: 947 971 854 2124#
+
+            **📝 Meeting Notes:** [Will be added after meeting]
+
+            ---
+
+            # 📕 Agenda
+
+            - [ ] @username: agenda item
+
+            ---
+            
+            **👥 Team updates below in comments - each person edit your own comment**`;
+
+            const CATEGORY_ID = 'DIC_kwDORCQWoM4C1fAZ';
+            const REPO_ID = 'R_kgDORCQWoA';  // Get this from the repo
+            
+            const mutation = `
+              mutation($repositoryId: ID!, $categoryId: ID!, $title: String!, $body: String!) {
+                createDiscussion(input: {
+                  repositoryId: $repositoryId
+                  categoryId: $categoryId
+                  title: $title
+                  body: $body
+                }) {
+                  discussion {
+                    url
+                  }
+                }
+              }
+            `;
+            
+            const result = await github.graphql(mutation, {
+              repositoryId: REPO_ID,
+              categoryId: CATEGORY_ID,
+              title: `${emoji} Week ${week}, ${year} - ${date}`,
+              body: body
+            });
+            
+            const discussionUrl = result.createDiscussion.discussion.url;
+            const discussionNumber = discussionUrl.split('/').pop();
+            
+            // Create comments for each team member
+            const teamMembers = [
+              { name: 'Khizer', template: '### Khizer\n\n- ' },
+              { name: 'Pepe', template: '### Pepe\n\n- ' },
+              { name: 'Andrew', username: '0xisk', template: '### 👻 Andrew\n\n**past week:**\n- \n\n**this week:**\n- \n\n**requests:**\n- ' },
+              { 
+                name: 'Iskander', 
+                username: 'iskander',
+                template: '### 𓂀 Iskander\n\n**past week:**\n\n<details>\n<summary>TODO</summary>\n\n- [ ] \n\n</details>\n\n<details>\n<summary>Dev</summary>\n\n- [ ] \n\n</details>\n\n<details>\n<summary>R&D</summary>\n\n- [ ] \n\n</details>\n\n<details>\n<summary>Meetings</summary>\n\n- [ ] \n\n</details>\n\n**this week:**\n- \n\n**requests:**\n- ' 
+              },
+              { 
+                name: 'Em',
+                username: 'em',
+                template: '### 👽 Em\n\n**past week:**\n\n<details>\n<summary>General</summary>\n\n- [ ] \n\n</details>\n\n<details>\n<summary>Reviews</summary>\n\n- [ ] \n\n</details>\n\n<details>\n<summary>PRs</summary>\n\n- [ ] \n\n</details>\n\n**this week:**\n- \n\n**requests:**\n- ' 
+              }
+            ];
+            
+            // Add comments for each team member
+            for (const member of teamMembers) {
+              const commentMutation = `
+                mutation($discussionId: ID!, $body: String!) {
+                  addDiscussionComment(input: {
+                    discussionId: $discussionId
+                    body: $body
+                  }) {
+                    comment {
+                      id
+                    }
+                  }
+                }
+              `;
+              
+              await github.graphql(commentMutation, {
+                discussionId: result.createDiscussion.discussion.id,
+                body: member.template
+              });
+            }
+            
+            console.log(`Created discussion with ${teamMembers.length} comments: ${discussionUrl}`);
