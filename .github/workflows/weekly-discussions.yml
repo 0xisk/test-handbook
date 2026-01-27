@@ -1,0 +1,151 @@
+name: Create Weekly Discussion
+on:
+  schedule:
+    - cron: '0 8 * * MON'  # Every Monday 8 AM UTC
+  workflow_dispatch:  # Manual trigger button
+
+jobs:
+  create-discussion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const emojis = ['🧬', '🔬', '🌙', '🚀', '🎯', '🔮', '⚡', '🌟', '💎', '🎨', '🔥', '🌊', '🎪', '🎭'];
+            const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            const today = new Date();
+            const year = today.getFullYear();
+            const week = Math.ceil((today - new Date(year, 0, 1)) / 604800000);
+            const date = today.toISOString().split('T')[0];
+            
+            const body = `📊 [GitHub Project](https://github.com/orgs/OpenZeppelin/projects/41)
+
+**📅 Meeting:** Monday, ${date} · 15:30 – 16:15 UTC (16:30 – 17:15 CET)  
+**🎥 Video call:** https://meet.google.com/jjw-weky-jzg  
+**📞 Dial-in:** +49 30 300195060, PIN: 947 971 854 2124#
+
+**📝 Meeting Notes:** [Will be added after meeting]
+
+---
+
+# 📕 Agenda
+
+*add any topic you want to discuss*
+
+- [ ] @username: agenda item
+
+---
+
+# 🗞 Management Updates
+
+### Khizer
+
+- 
+
+### Pepe
+
+- 
+
+---
+
+# 👨‍💻 Developer Updates
+
+### 👻 Andrew
+
+**past week:**
+- 
+
+**this week:**
+- 
+
+**requests:**
+- 
+
+### 𓂀 Iskander
+
+**past week:**
+
+<details>
+<summary>TODO</summary>
+
+- [ ] 
+- [ ] 
+
+</details>
+
+<details>
+<summary>Dev</summary>
+
+- [ ] 
+- [ ] 
+
+</details>
+
+<details>
+<summary>R&D</summary>
+
+- [ ] 
+- [ ] 
+
+</details>
+
+<details>
+<summary>Meetings</summary>
+
+- [ ] 
+- [ ] 
+
+</details>
+
+**this week:**
+- 
+
+**requests:**
+- 
+
+### 👽 Em
+
+**past week:**
+
+<details>
+<summary>General</summary>
+
+- [ ] 
+- [ ] 
+
+</details>
+
+<details>
+<summary>Reviews</summary>
+
+- [ ] 
+- [ ] 
+
+</details>
+
+<details>
+<summary>PRs</summary>
+
+- [ ] 
+- [ ] 
+
+</details>
+
+**this week:**
+- 
+
+**requests:**
+- `;
+
+            const CATEGORY_ID = 'DIC_kwDORCQWoM4C1fAZ';  // Weekly Planning category
+            
+            await github.rest.discussions.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              category_id: CATEGORY_ID,
+              title: `${emoji} Week ${week}, ${year} - ${date}`,
+              body: body
+            });
+            
+            console.log(`Created discussion: ${emoji} Week ${week}, ${year} - ${date}`);
