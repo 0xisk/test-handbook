@@ -87,6 +87,8 @@ jobs:
             ];
             
             // Add comments for each team member
+            const discussionNodeId = result.createDiscussion.discussion.id;
+            
             for (const member of teamMembers) {
               const commentMutation = `
                 mutation($discussionId: ID!, $body: String!) {
@@ -101,10 +103,15 @@ jobs:
                 }
               `;
               
-              await github.graphql(commentMutation, {
-                discussionId: result.createDiscussion.discussion.id,
-                body: member.template
-              });
+              try {
+                await github.graphql(commentMutation, {
+                  discussionId: discussionNodeId,
+                  body: member.template
+                });
+                console.log(`Added comment for ${member.name}`);
+              } catch (error) {
+                console.error(`Failed to add comment for ${member.name}:`, error.message);
+              }
             }
             
             console.log(`Created discussion with ${teamMembers.length} comments: ${discussionUrl}`);
