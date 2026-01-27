@@ -139,13 +139,28 @@ jobs:
             - `;
 
             const CATEGORY_ID = 'DIC_kwDORCQWoM4C1fAZ';
+            const REPO_ID = 'R_kgDORCQWoA';  // Get this from the repo
             
-            await github.rest.discussions.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              category_id: CATEGORY_ID,
+            const mutation = `
+              mutation($repositoryId: ID!, $categoryId: ID!, $title: String!, $body: String!) {
+                createDiscussion(input: {
+                  repositoryId: $repositoryId
+                  categoryId: $categoryId
+                  title: $title
+                  body: $body
+                }) {
+                  discussion {
+                    url
+                  }
+                }
+              }
+            `;
+            
+            const result = await github.graphql(mutation, {
+              repositoryId: REPO_ID,
+              categoryId: CATEGORY_ID,
               title: `${emoji} Week ${week}, ${year} - ${date}`,
               body: body
             });
             
-            console.log(`Created discussion: ${emoji} Week ${week}, ${year} - ${date}`);
+            console.log(`Created discussion: ${result.createDiscussion.discussion.url}`);
