@@ -30,8 +30,7 @@ jobs:
             const body = `📊 [GitHub Project](https://github.com/orgs/OpenZeppelin/projects/41)
 
             **📅 Meeting:** Monday, ${date} · 15:30 – 16:15 UTC (16:30 – 17:15 CET)  
-            **🎥 Video call:** https://meet.google.com/jjw-weky-jzg  
-            **📞 Dial-in:** +49 30 300195060, PIN: 947 971 854 2124#
+            **🎥 Video call:** https://meet.google.com/jjw-weky-jzg
 
             **📝 Meeting Notes:** [Will be added after meeting]
 
@@ -87,19 +86,92 @@ jobs:
             const discussionUrl = result.createDiscussion.discussion.url;
             const discussionNumber = discussionUrl.split('/').pop();
             
+            // Dev team templates
+            const andrewTemplate = `### 👻 Andrew (@andrew-fleming)
+
+            **past week:**
+            - 
+            
+            **this week:**
+            - 
+            
+            **requests:**
+            - `;
+            
+            const iskanderTemplate = `### 𓂀 Iskander (@0xisk)
+            
+            **past week:**
+            
+            <details>
+            <summary>TODO</summary>
+            
+            - [ ] 
+            
+            </details>
+            
+            <details>
+            <summary>Dev</summary>
+            
+            - [ ] 
+            
+            </details>
+            
+            <details>
+            <summary>R&D</summary>
+            
+            - [ ] 
+            
+            </details>
+            
+            <details>
+            <summary>Meetings</summary>
+            
+            - [ ] 
+            
+            </details>
+            
+            **this week:**
+            - 
+            
+            **requests:**
+            - `;
+            
+            const emTemplate = `### 👽 Em (@emnul)
+            
+            **past week:**
+            
+            <details>
+            <summary>General</summary>
+            
+            - [ ] 
+            
+            </details>
+            
+            <details>
+            <summary>Reviews</summary>
+            
+            - [ ] 
+            
+            </details>
+            
+            <details>
+            <summary>PRs</summary>
+            
+            - [ ] 
+            
+            </details>
+            
+            **this week:**
+            - 
+            
+            **requests:**
+            - `;
+            
             // Create comments for dev team members only
             const teamMembers = [
-              { name: 'Andrew', username: 'andrew-fleming', template: '### 👻 Andrew (@andrew-fleming)\n\n**past week:**\n- \n\n**this week:**\n- \n\n**requests:**\n- ' },
-              { 
-                name: 'Iskander', 
-                username: '0xisk',
-                template: '### 𓂀 Iskander (@0xisk)\n\n**past week:**\n\n<details>\n<summary>TODO</summary>\n\n- [ ] \n\n</details>\n\n<details>\n<summary>Dev</summary>\n\n- [ ] \n\n</details>\n\n<details>\n<summary>R&D</summary>\n\n- [ ] \n\n</details>\n\n<details>\n<summary>Meetings</summary>\n\n- [ ] \n\n</details>\n\n**this week:**\n- \n\n**requests:**\n- ' 
-              },
-              { 
-                name: 'Em',
-                username: 'emnul',
-                template: '### 👽 Em (@emnul)\n\n**past week:**\n\n<details>\n<summary>General</summary>\n\n- [ ] \n\n</details>\n\n<details>\n<summary>Reviews</summary>\n\n- [ ] \n\n</details>\n\n<details>\n<summary>PRs</summary>\n\n- [ ] \n\n</details>\n\n**this week:**\n- \n\n**requests:**\n- ' 
-              }
+              { name: 'Andrew', username: 'andrew-fleming', template: andrewTemplate },
+              { name: 'Iskander', username: '0xisk', template: iskanderTemplate },
+              { name: 'Em', username: 'emnul', template: emTemplate }
             ];
             
             // Add comments for each dev team member
