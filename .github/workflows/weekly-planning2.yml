@@ -1,7 +1,7 @@
 name: Create Weekly Discussion
 on:
   schedule:
-    - cron: '0 8 * * MON'  # Every Monday 8 AM UTC
+    - cron: '30 16 * * MON'  # Every Monday 16:30 UTC (when previous week ends)
   workflow_dispatch:  # Manual trigger button
 
 jobs:
@@ -18,9 +18,14 @@ jobs:
             const emoji = emojis[Math.floor(Math.random() * emojis.length)];
             
             const today = new Date();
-            const year = today.getFullYear();
-            const week = Math.ceil((today - new Date(year, 0, 1)) / 604800000);
             const date = today.toISOString().split('T')[0];
+            
+            // Calculate ISO week number
+            const d = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+            d.setDate(d.getDate() + 4 - (d.getDay() || 7));
+            const yearStart = new Date(d.getFullYear(), 0, 1);
+            const week = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+            const year = today.getFullYear();
             
             const body = `📊 [GitHub Project](https://github.com/orgs/OpenZeppelin/projects/41)
 
