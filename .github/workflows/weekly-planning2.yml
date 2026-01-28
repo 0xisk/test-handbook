@@ -32,6 +32,19 @@ jobs:
 
             ---
 
+            ## 👥 Team
+
+            **Management:**
+            - 🔧 **Pepe (@pepebndc)** - Engineering Manager
+            - 📋 **Khizer (@oz-khizer)** - Project Manager
+
+            **Dev Team:**
+            - @andrew-fleming
+            - @0xisk
+            - @emnul
+
+            ---
+
             # 📕 Agenda
 
             - [ ] @username: agenda item
@@ -69,10 +82,8 @@ jobs:
             const discussionUrl = result.createDiscussion.discussion.url;
             const discussionNumber = discussionUrl.split('/').pop();
             
-            // Create comments for each team member
+            // Create comments for dev team members only
             const teamMembers = [
-              { name: 'Khizer', username: 'oz-khizer', template: '### Khizer (@oz-khizer)\n\n- ' },
-              { name: 'Pepe', username: 'pepebndc', template: '### Pepe (@pepebndc)\n\n- ' },
               { name: 'Andrew', username: 'andrew-fleming', template: '### 👻 Andrew (@andrew-fleming)\n\n**past week:**\n- \n\n**this week:**\n- \n\n**requests:**\n- ' },
               { 
                 name: 'Iskander', 
@@ -86,7 +97,7 @@ jobs:
               }
             ];
             
-            // Add comments for each team member
+            // Add comments for each dev team member
             const discussionNodeId = result.createDiscussion.discussion.id;
             
             for (const member of teamMembers) {
