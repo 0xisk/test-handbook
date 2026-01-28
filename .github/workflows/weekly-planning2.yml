@@ -89,82 +89,82 @@ jobs:
             // Dev team templates
             const andrewTemplate = `### 👻 Andrew (@andrew-fleming)
 
-            **past week:**
+            ## **past week:**
             - 
             
-            **this week:**
+            ## **this week:**
             - 
             
-            **requests:**
+            ## **requests:**
             - `;
             
             const iskanderTemplate = `### 𓂀 Iskander (@0xisk)
             
-            **past week:**
+            ## **past week:**
             
             <details>
-            <summary>TODO</summary>
+            <summary><strong>TODO</strong></summary>
             
             - [ ] 
             
             </details>
             
             <details>
-            <summary>Dev</summary>
+            <summary><strong>Dev</strong></summary>
             
             - [ ] 
             
             </details>
             
             <details>
-            <summary>R&D</summary>
+            <summary><strong>R&D</strong></summary>
             
             - [ ] 
             
             </details>
             
             <details>
-            <summary>Meetings</summary>
+            <summary><strong>Meetings</strong></summary>
             
             - [ ] 
             
             </details>
             
-            **this week:**
+            ## **this week:**
             - 
             
-            **requests:**
+            ## **requests:**
             - `;
             
-            const emTemplate = `### 👽 Em (@emnul)
+                        const emTemplate = `### 👽 Em (@emnul)
             
-            **past week:**
+            ## **past week:**
             
             <details>
-            <summary>General</summary>
+            <summary><strong>General</strong></summary>
             
             - [ ] 
             
             </details>
             
             <details>
-            <summary>Reviews</summary>
+            <summary><strong>Reviews</strong></summary>
             
             - [ ] 
             
             </details>
             
             <details>
-            <summary>PRs</summary>
+            <summary><strong>PRs</strong></summary>
             
             - [ ] 
             
             </details>
             
-            **this week:**
+            ## **this week:**
             - 
             
-            **requests:**
+            ## **requests:**
             - `;
             
             // Create comments for dev team members only
